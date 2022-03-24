@@ -1,7 +1,6 @@
 import 'package:calculator/config/colors.dart';
 import 'package:calculator/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
