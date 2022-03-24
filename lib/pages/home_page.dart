@@ -25,15 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   void _addOperatorToExpression({required String operator}) {
     if (_typingExpression[2].isNotEmpty) {
-      num result = Utils.calculateTwoNumbers(
-          number1: num.parse(_typingExpression[0]),
-          number2: num.parse(_typingExpression[2]),
-          operator: _typingExpression[1]);
-
-      setState(() {
-        _historyExpression = _typingExpression;
-        _typingExpression = [result.toString(), "", ""];
-      });
+      _calculateExpression();
     } else {
       setState(() {
         _typingExpression[1] = " $operator ";
@@ -66,6 +58,30 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _calculateExpression() {
+    if (_typingExpression[1].isNotEmpty) {
+      num result = Utils.calculateTwoNumbers(
+          number1: num.parse(_typingExpression[0]),
+          number2: num.parse(_typingExpression[2]),
+          operator: _typingExpression[1]);
+
+      setState(() {
+        _historyExpression = _typingExpression;
+        _typingExpression = [result.toString(), "", ""];
+      });
+    } else {
+      num result = Utils.calculateTwoNumbers(
+          number1: num.parse(_typingExpression[0]),
+          number2: num.parse(_historyExpression[2]),
+          operator: _historyExpression[1]);
+
+      setState(() {
+        _historyExpression[0] = _typingExpression[0];
+        _typingExpression = [result.toString(), "", ""];
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     bool _isDarkTheme =
@@ -76,17 +92,17 @@ class _HomePageState extends State<HomePage> {
         statusBarColor: _isDarkTheme ? Colors.black : Colors.white,
         statusBarBrightness: _isDarkTheme ? Brightness.light : Brightness.dark,
         statusBarIconBrightness:
-        _isDarkTheme ? Brightness.light : Brightness.dark));
+            _isDarkTheme ? Brightness.light : Brightness.dark));
 
     return Scaffold(
         body: SafeArea(
-          child: Column(
-            children: [
-              Flexible(
-                flex: 1,
-                fit: FlexFit.tight,
-                child: Container(
-                  width: double.infinity,
+      child: Column(
+        children: [
+          Flexible(
+            flex: 1,
+            fit: FlexFit.tight,
+            child: Container(
+              width: double.infinity,
               color: _isDarkTheme ? Colors.black : Colors.white,
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -110,20 +126,20 @@ class _HomePageState extends State<HomePage> {
                                       Theme.of(context).colorScheme.primary)),
                           TextSpan(text: _historyExpression[2]),
                         ],
-                          ),
-                        ),
                       ),
-                      RichText(
-                        text: TextSpan(
-                          text: _typingExpression[0],
-                          style: TextStyle(
-                              fontSize: 45,
-                              fontWeight: FontWeight.w900,
-                              color: _isDarkTheme ? Colors.white : Colors.black),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: _typingExpression[1],
-                                style: TextStyle(
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: _typingExpression[0],
+                      style: TextStyle(
+                          fontSize: 45,
+                          fontWeight: FontWeight.w900,
+                          color: _isDarkTheme ? Colors.white : Colors.black),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: _typingExpression[1],
+                            style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary)),
                         TextSpan(text: _typingExpression[2]),
                       ],
@@ -226,7 +242,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: "8");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -241,7 +259,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: "9");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -272,7 +292,9 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: "4");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -287,7 +309,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: "5");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -302,7 +326,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: "6");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -333,7 +359,9 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: "1");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -348,7 +376,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: "2");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -363,7 +393,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: "3");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -409,7 +441,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: "0");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
@@ -439,7 +473,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _calculateExpression();
+                                },
                                 child: const Align(
                                   alignment: Alignment.center,
                                   child: Text(
