@@ -14,6 +14,9 @@ class Utils {
       case "x":
         return number1 * number2;
 
+      case "%":
+        return number1 % number2;
+
       default:
         return 0;
     }

@@ -206,7 +206,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addOperatorToExpression(operator: "%");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Icon(Icons.percent,
