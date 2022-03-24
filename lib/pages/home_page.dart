@@ -14,13 +14,21 @@ class _HomePageState extends State<HomePage> {
   List<String> _typingExpression = ["", "", ""];
 
   void _addNumberToExpression({required String number}) {
-    setState(() {
-      if (_typingExpression[1].isNotEmpty) {
-        _typingExpression[2] = _typingExpression[2] + number;
-      } else {
-        _typingExpression[0] = _typingExpression[0] + number;
+    if (_typingExpression[1].isNotEmpty) {
+      if (number != "." ||
+          (number == "." && !_typingExpression[2].contains(number))) {
+        setState(() {
+          _typingExpression[2] = _typingExpression[2] + number;
+        });
       }
-    });
+    } else {
+      if ((number == "." && !_typingExpression[0].contains(number)) ||
+          number != ".") {
+        setState(() {
+          _typingExpression[0] = _typingExpression[0] + number;
+        });
+      }
+    }
   }
 
   void _addOperatorToExpression({required String operator}) {
@@ -186,6 +194,9 @@ class _HomePageState extends State<HomePage> {
                                 onPressed: () {
                                   _popFromExpression();
                                 },
+                                onLongPress: () {
+                                  _clearAllExpressions();
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Icon(Icons.backspace_outlined,
@@ -276,7 +287,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addOperatorToExpression(operator: "x");
+                                },
                                 child: const Align(
                                   alignment: Alignment.center,
                                   child: Icon(
@@ -343,7 +356,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addOperatorToExpression(operator: "-");
+                                },
                                 child: const Align(
                                   alignment: Alignment.center,
                                   child: Icon(
@@ -410,7 +425,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addOperatorToExpression(operator: "+");
+                                },
                                 child: const Align(
                                   alignment: Alignment.center,
                                   child: Icon(
@@ -458,7 +475,9 @@ class _HomePageState extends State<HomePage> {
                                 ))),
                         Expanded(
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _addNumberToExpression(number: ".");
+                                },
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(

@@ -11,7 +11,7 @@ class Utils {
       case "/":
         return number1 / number2;
 
-      case "*":
+      case "x":
         return number1 * number2;
 
       default:
