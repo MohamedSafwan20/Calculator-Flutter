@@ -150,7 +150,10 @@ class _HomePageState extends State<HomePage> {
                         TextSpan(
                             text: _typingExpression[1],
                             style: TextStyle(
-                                color: Theme.of(context).colorScheme.primary)),
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 40,
+                            )),
                         TextSpan(text: _typingExpression[2]),
                       ],
                     ),
