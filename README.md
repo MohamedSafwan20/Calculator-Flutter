@@ -1,6 +1,6 @@
-# calculator
+# Calculator
 
-A new Flutter project.
+Calculator app which supports light and dark theme.
 
 ## Getting Started
 
