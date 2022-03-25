@@ -14,8 +14,6 @@ class _HomePageState extends State<HomePage> {
   List<String> _typingExpression = ["", "", ""];
 
   void _addNumberToExpression({required String number}) {
-    // _scrollToEnd();
-
     if (_typingExpression[1].isNotEmpty) {
       if (number != "." ||
           (number == "." && !_typingExpression[2].contains(number))) {
@@ -34,12 +32,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _addOperatorToExpression({required String operator}) {
-    if (_typingExpression[2].isNotEmpty) {
-      _calculateExpression();
-    } else {
-      setState(() {
-        _typingExpression[1] = " $operator ";
-      });
+    if (_typingExpression[0].isNotEmpty) {
+      if (_typingExpression[2].isNotEmpty) {
+        _calculateExpression();
+      } else {
+        setState(() {
+          _typingExpression[1] = " $operator ";
+        });
+      }
     }
   }
 
@@ -139,9 +139,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  RichText(
-                    overflow: TextOverflow.fade,
-                    text: TextSpan(
+                  SelectableText.rich(
+                    TextSpan(
                       text: _typingExpression[0],
                       style: TextStyle(
                           fontSize: 45,
